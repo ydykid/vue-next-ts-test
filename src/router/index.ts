@@ -1,5 +1,6 @@
 import {
     createRouter, createWebHistory,
+    createWebHashHistory,
     RouterOptions, RouteRecordRaw,
 } from 'vue-router'
 
@@ -17,7 +18,8 @@ const routes: RouteRecordRaw[] = [
     }
 ]
 const options: RouterOptions = {
-    history: createWebHistory(process.env.BASE_URL),
+    // history: createWebHistory(process.env.BASE_URL),
+    history: createWebHashHistory(process.env.BASE_URL),
     routes 
 }
 

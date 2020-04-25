@@ -1,4 +1,6 @@
 {
+  "name": "vue-nest-ts-test",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server",

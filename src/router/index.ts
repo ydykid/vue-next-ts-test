@@ -6,6 +6,9 @@ import {
 
 import Home from '../views/home/index.vue'
 import Test from '../views/test/index.vue'
+import Article from '@/views/article/index.vue'
+import ArticleList from '@/views/article/list.vue'
+import ArticleDetail from '@/views/article/detail.vue'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -15,7 +18,25 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/test',
         component: Test
+    },
+    {
+        path: '/article',
+        component: Article,
+        children: [
+            {
+                path: '',
+                name: 'ArticleList',
+                component: ArticleList
+            },
+            {
+                path: 'detail/:id',
+                name: 'ArticleDetail',
+                component: ArticleDetail,
+                props: true
+            }
+        ]
     }
+
 ]
 const options: RouterOptions = {
     // history: createWebHistory(process.env.BASE_URL),

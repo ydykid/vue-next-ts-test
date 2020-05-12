@@ -7,3 +7,10 @@ export function articleList() {
         method: 'get'
     })
 }
+
+export function articleDetail(id: Number|undefined) {
+    return request({
+        url: 'api/article/article/' + id + '/',
+        method: 'get'
+    })
+}

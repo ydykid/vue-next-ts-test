@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <img src="./logo.png">
-    <h1>Hello Vue 3!</h1>
+    <!-- <img src="./logo.png">
+    <h1>Hello Vue 3!</h1> -->
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/test">Test</router-link>
+      <router-link to="/test">Test</router-link> |
+      <router-link to="/article">Article</router-link>
     </div>
     <router-view/>
   </div>

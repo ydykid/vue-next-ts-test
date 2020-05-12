@@ -14,3 +14,20 @@ export function articleDetail(id: Number|undefined) {
         method: 'get'
     })
 }
+
+export function articleCreate(data: Object) {
+    return request({
+        url: 'api/article/article/',
+        method: 'post',
+        data: data
+    })
+}
+
+export function articleUpdate(data: any) {
+    const id = data 
+    return request({
+        url: 'api/article/article/' + data.id + '/',
+        method: 'patch',
+        data: data
+    })
+}

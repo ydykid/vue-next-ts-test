@@ -3,6 +3,13 @@
         <h1>Article Detail</h1>
         <h2>title: {{detail.title}}</h2>
         <div v-html="detail.content"></div>
+        <form>
+            <label>title</label>
+            <input name="title" v-model="form.title"/>
+            <label>content</label>
+            <textarea name="content" v-model="form.content"/>
+            <button type="button" @click="submit">提交</button>
+        </form>
     </div>
 </template>
 <script lang="ts">
@@ -10,22 +17,36 @@ import {
     ref, defineComponent, getCurrentInstance,
     onMounted
 } from 'vue'
-import { articleDetail } from '@/api/article'
+import { articleDetail, articleUpdate } from '@/api/article'
 
 // import store from '../../store/index'
 // import store from '@/store'
 
 function article(id: Number | undefined) {
     const detail = ref({})
+    const form = ref({})
     onMounted(() => {
         articleDetail(id) 
             .then((res) => {
                 detail.value = res.data
+                form.value = Object.assign({}, res.data)
             })
     })
+    const submit = () => {
+        articleUpdate(form.value)
+            .then((res) => {
+                alert('upate success ^_^')
+                console.log('update ok', res)
+            })
+            .catch((err) => {
+                alert('update failed @.@')
+                console.log('update err', err)
+            })
+    }
 
     return {
-       detail 
+       detail, form,
+       submit
     }
 }
 
@@ -36,9 +57,10 @@ export default defineComponent({
     },
     setup(props) {
         // article
-        const { detail } = article(props.id)
+        const { detail, form, submit } = article(props.id)
         return {
-            detail
+            detail, form,
+            submit
         }
     },
     computed: {

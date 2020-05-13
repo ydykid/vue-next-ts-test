@@ -8,6 +8,7 @@
                 </router-link>
                 <!-- content:{{item.content}}
                 <div v-html="item.content"></div> -->
+                | <a @click="deleteArticle(item.id)">删除</a>
             </li>
         </ul>
         <form>
@@ -24,7 +25,7 @@ import {
     ref, defineComponent, getCurrentInstance,
     onMounted
 } from 'vue'
-import { articleList, articleCreate } from '@/api/article'
+import { articleList, articleCreate, articleDelete } from '@/api/article'
 
 // import store from '../../store/index'
 // import store from '@/store'
@@ -40,10 +41,19 @@ function article() {
                 articles.value = res.data
             })
     }
-    onMounted(() => {
-        getArticles()
-    })
 
+    const deleteArticle = (id: Number|undefined) => {
+        articleDelete(id)
+            .then((res: any) => {
+                getArticles()
+                alert(`delete[${id}] success`)
+                console.log('delete ok', res)
+            })
+            .catch((err: any) => {
+                alert(`delete[${id}] failed`)
+                console.log('delete err', err)
+            })
+    }
     const submit = () => {
         articleCreate(form.value)
             .then((res) => {
@@ -57,9 +67,13 @@ function article() {
             })
     }
 
+    onMounted(() => {
+        getArticles()
+    })
+
     return {
         articles, form,
-        submit
+        submit, deleteArticle
     }
 }
 
@@ -67,9 +81,13 @@ export default defineComponent({
     name: 'ArticleList',
     setup() {
         // article
-        const { articles, form, submit } = article()
+        const {
+            articles, form,
+            submit, deleteArticle
+            } = article()
         return {
-            articles, form, submit
+            articles, form,
+            submit, deleteArticle
         }
     },
     computed: {

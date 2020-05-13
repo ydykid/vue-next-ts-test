@@ -24,10 +24,17 @@ export function articleCreate(data: Object) {
 }
 
 export function articleUpdate(data: any) {
-    const id = data 
+    // const id = data 
     return request({
         url: 'api/article/article/' + data.id + '/',
         method: 'patch',
         data: data
+    })
+}
+
+export function articleDelete(id: Number|undefined) {
+    return request({
+        url: 'api/article/article/' + id + '/',
+        method: 'delete'
     })
 }

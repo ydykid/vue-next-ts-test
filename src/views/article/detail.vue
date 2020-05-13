@@ -25,16 +25,20 @@ import { articleDetail, articleUpdate } from '@/api/article'
 function article(id: Number | undefined) {
     const detail = ref({})
     const form = ref({})
-    onMounted(() => {
+    const getDetail = () => {
         articleDetail(id) 
             .then((res) => {
                 detail.value = res.data
                 form.value = Object.assign({}, res.data)
             })
+    }
+    onMounted(() => {
+        getDetail()
     })
     const submit = () => {
         articleUpdate(form.value)
             .then((res) => {
+                getDetail()
                 alert('upate success ^_^')
                 console.log('update ok', res)
             })

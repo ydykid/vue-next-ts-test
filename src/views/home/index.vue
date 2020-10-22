@@ -39,7 +39,7 @@
                         </select>
                         start:{{cost.begin_date}},end:{{cost.end_date}},
                         cost:{{cost.cost}},
-                        cost_unit:{{cos}}
+                        cost_unit:{{cost.cost_unit}}
                         <select :name="'cost_unit_'+cost.id" :id="'select_cost_unit'+cost.id"
                          v-model="cost.cost_unit">
                             # COST_UNIT_CHOICES = [
@@ -135,7 +135,8 @@ function cost_setup() {
         ]
     }
     const contract_data = ref(Object(data))
-    const res_data = ref(Object())
+    // const res_data = ref(Object())
+    const res_data = ref([])
     const handleContractToBills = () => {
         contractToBillsApi(contract_data.value)
             .then((res) => {

@@ -246,7 +246,7 @@
             <caption>账单列表</caption>
             <thead>
                 <th>s</th>
-                <th>类型</th>
+                <th>科目</th>
                 <th>开始</th>
                 <th>结束</th>
                 <th>应收账</th>
@@ -256,8 +256,8 @@
                 <tr v-for="(bill, index) in res_data" :key="index">
                     <td>{{bill.state}}</td>
                     <td>{{bill.charging_subject}}</td>
-                    <td>{{bill.start_date}}</td>
-                    <td>{{bill.end_date}}</td>
+                    <td>{{bill.start_date}}|{{bill.start_date_}}</td>
+                    <td>{{bill.end_date}}|{{bill.end_date_}}</td>
                     <td>{{bill.receivable_amount}}</td>
                     <td>{{bill.remark}}</td>
                 </tr>
@@ -276,28 +276,53 @@ import {
 function cost_setup() {
     const data = {
         contract_parameter: {
-            stage_method: 1,
+            stage_method: 0,
             decimal_number: 2,
             deadline_number: 0,
             date_number: 1,
             date_unit: 1,
-            is_method: 1
+            is_method: 0
         },
-        start_date: '2020-09-21',
-        end_date: '2020-11-21',
-        deposit_period: 1,
-        payment_period: 1,
+        start_date: '2020-01-01',
+        end_date: '2022-12-31',
+        deposit_period: 3,
+        payment_period: 3,
         costs: [
             {
                 cost_type: 0,
-                room_position: [1, 2],
-                seat_position: [3, 5],
-                area: 123.3,
+                // room_position: [1, 2],
+                room_position: [1,],
+                // seat_position: [3, 5],
+                area: 100,
                 pay_type: 1,
-                begin_date: '2020-09-30',
-                end_date: '2020-12-02',
-                cost: 123.1,
-                cost_unit: 1
+                begin_date: '2020-01-10',
+                end_date: '2020-04-14',
+                cost: 300,
+                cost_unit: 3
+            }
+            ,{
+                cost_type: 0,
+                // room_position: [1, 2],
+                room_position: [1,],
+                // seat_position: [3, 5],
+                area: 100,
+                pay_type: 1,
+                begin_date: '2021-01-06',
+                end_date: '2022-03-17',
+                cost: 4,
+                cost_unit: 3
+            }
+
+            ,{
+                cost_type: 1,
+                room_position: [1, 2],
+                // seat_position: [3, 5],
+                area: 100,
+                pay_type: 1,
+                begin_date: '2021-01-06',
+                end_date: '2022-03-17',
+                cost: 4,
+                cost_unit: 3
             }
         ]
     }
